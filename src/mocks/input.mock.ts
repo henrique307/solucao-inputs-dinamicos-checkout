@@ -1,12 +1,30 @@
-import { z } from "zod";
-
 export interface InputMock {
-    nome: string;
+  nome: string;
+  configuracoes: {
     tipo: string;
     validacao: any;
+    opcoes?: string[];
+    duasColunas?: boolean;
+  };
 }
 
-export const inputs: InputMock[] = [
-    { nome: "email", tipo: "text", validacao: z.string().email() },
-    { nome: "workshop", tipo: "text", validacao: z.string() }
-]
+export const inputsMock: InputMock[] = [
+  {
+    nome: "email",
+    configuracoes: {
+      tipo: "email",
+      validacao: "z.string().email()",
+    },
+  },
+  {
+    nome: "workshop",
+    configuracoes: {
+      tipo: "select",
+      validacao: "z.string().min(1, 'escolha um')",
+      opcoes: ["teste um", "teste dois", "teste 3", "teste ortauq"],
+      duasColunas: true
+    },
+  },
+];
+
+export const inputs: string = JSON.stringify(inputsMock);

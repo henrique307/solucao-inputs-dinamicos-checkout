@@ -1,11 +1,13 @@
 import { z } from "zod";
-import { inputs } from "./mocks/input.mock";
+import { InputMock, inputs } from "./mocks/input.mock";
+
+const inputsSchema = JSON.parse(inputs);
 
 let inputsAdicionais = z.object({});
 
-inputs.forEach(input => {
+inputsSchema.forEach((input: InputMock) => {
     inputsAdicionais = inputsAdicionais.extend({
-        [input.nome]: input.validacao
+        [input.nome]: eval(input.configuracoes.validacao)
     })
 });
 
